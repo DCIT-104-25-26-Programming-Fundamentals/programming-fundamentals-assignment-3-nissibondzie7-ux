@@ -59,4 +59,61 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 6
+// =============================================================================
+//
+// TASK: Multiplication Table Generator
+// ... (comments unchanged)
+//
 
+const readlineSync = require('readline-sync');
+
+/**
+ * Prints the multiplication table for a single number, from 1 to 12.
+ * @param {number} num - the number to build a table for
+ */
+function printSingleTable(num) {
+  console.log(`Multiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    const product = num * i;
+    console.log(`${num}  x  ${String(i).padEnd(2, ' ')}  =  ${product}`);
+  }
+}
+
+/**
+ * Prints multiplication tables for every number from 1 to N,
+ * separated by a divider line.
+ * @param {number} n - the upper bound
+ */
+function printTablesUpToN(n) {
+  if (n <= 0) {
+    console.log('Error: N must be a positive integer.');
+    return;
+  }
+
+  for (let num = 1; num <= n; num++) {
+    printSingleTable(num);
+    if (num < n) {
+      console.log('---------------------------');
+    }
+  }
+}
+
+function main() {
+  // ---------------------------------------------------------------------
+  // PART A — Single Table
+  // ---------------------------------------------------------------------
+  console.log('=== PART A: Single Table ===');
+  const num = readlineSync.questionInt('Enter a number: ');
+  printSingleTable(num);
+
+  // ---------------------------------------------------------------------
+  // PART B — Bonus: Tables from 1 to N
+  // ---------------------------------------------------------------------
+  console.log('\n=== PART B: Tables from 1 to N ===');
+  const n = readlineSync.questionInt('Enter N: ');
+  printTablesUpToN(n);
+}
+
+main();
