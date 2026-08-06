@@ -75,3 +75,147 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+/**
+ * Adds two numbers.
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * Subtracts b from a.
+ */
+function subtract(a, b) {
+  return a - b;
+}
+
+/**
+ * Multiplies two numbers.
+ */
+function multiply(a, b) {
+  return a * b;
+}
+
+/**
+ * Divides a by b. Returns null if b is 0 (division by zero).
+ */
+function divide(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a / b;
+}
+
+/**
+ * Returns the remainder of a divided by b. Returns null if b is 0.
+ */
+function modulus(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a % b;
+}
+
+/**
+ * Raises a to the power of b.
+ */
+function exponent(a, b) {
+  return a ** b;
+}
+
+/**
+ * Prompts the user for two numbers.
+ * @returns {{first: number, second: number}}
+ */
+function getTwoNumbers() {
+  const first = readlineSync.questionFloat('Enter first number : ');
+  const second = readlineSync.questionFloat('Enter second number: ');
+  return { first, second };
+}
+
+/**
+ * Displays the main menu.
+ */
+function printMenu() {
+  console.log('\n============================');
+  console.log('     SIMPLE CALCULATOR');
+  console.log('============================');
+  console.log('1. Addition');
+  console.log('2. Subtraction');
+  console.log('3. Multiplication');
+  console.log('4. Division');
+  console.log('5. Modulus');
+  console.log('6. Exponentiation');
+  console.log('7. Quit');
+}
+
+function main() {
+  let running = true;
+
+  while (running) {
+    printMenu();
+    const choice = readlineSync.questionInt('Select an operation (1-7): ');
+
+    let first, second, result, symbol;
+
+    switch (choice) {
+      case 1:
+        ({ first, second } = getTwoNumbers());
+        result = add(first, second);
+        console.log(`Result: ${first} + ${second} = ${result.toFixed(2)}`);
+        break;
+
+      case 2:
+        ({ first, second } = getTwoNumbers());
+        result = subtract(first, second);
+        console.log(`Result: ${first} - ${second} = ${result.toFixed(2)}`);
+        break;
+
+      case 3:
+        ({ first, second } = getTwoNumbers());
+        result = multiply(first, second);
+        console.log(`Result: ${first} * ${second} = ${result.toFixed(2)}`);
+        break;
+
+      case 4:
+        ({ first, second } = getTwoNumbers());
+        result = divide(first, second);
+        if (result === null) {
+          console.log('Error: Cannot divide by zero.');
+        } else {
+          console.log(`Result: ${first} / ${second} = ${result.toFixed(2)}`);
+        }
+        break;
+
+      case 5:
+        ({ first, second } = getTwoNumbers());
+        result = modulus(first, second);
+        if (result === null) {
+          console.log('Error: Cannot divide by zero.');
+        } else {
+          console.log(`Result: ${first} % ${second} = ${result.toFixed(2)}`);
+        }
+        break;
+
+      case 6:
+        ({ first, second } = getTwoNumbers());
+        result = exponent(first, second);
+        console.log(`Result: ${first} ** ${second} = ${result.toFixed(2)}`);
+        break;
+
+      case 7:
+        console.log('Goodbye!');
+        running = false;
+        break;
+
+      default:
+        console.log('Invalid choice. Please select a number between 1 and 7.');
+        break;
+    }
+  }
+}
+
+main(); 
+
